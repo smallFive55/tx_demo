@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="ai.yunxi.order.mapper.OrderMapper">
+	<resultMap id="BaseResultMap" type="ai.yunxi.core.entity.Order">
+		<id column="order_id" property="orderId" jdbcType="INTEGER" />
+		<result column="product_id" property="productId" jdbcType="INTEGER" />
+		<result column="customer" property="customer" jdbcType="VARCHAR" />
+		<result column="number" property="number" jdbcType="INTEGER" />
+	</resultMap>
+	<insert id="insert" keyProperty="orderId" useGeneratedKeys="true" parameterType="ai.yunxi.core.entity.Order">
+		insert into t_order(product_id,customer,number) 
+		values(
+			#{productId,jdbcType=INTEGER},
+			#{customer,jdbcType=VARCHAR},
+			#{number,jdbcType=INTEGER}
+		)
+		<selectKey resultType="INTEGER" keyProperty="orderId" order="AFTER">
+	        SELECT LAST_INSERT_ID()
+	    </selectKey>
+	</insert>
+	
+	<delete id="delete" parameterType="INTEGER">
+		delete from t_order where order_id=#{orderId}
+	</delete>
+	
+	<update id="update" parameterType="INTEGER">
+		update t_order set status=1 where order_id=#{orderId}
+	</update>
+</mapper>
