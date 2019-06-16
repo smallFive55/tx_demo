@@ -49,7 +49,7 @@ public class OrderTest {
 				@Override
 				public void run() {
 					Order order = new Order();
-					order.setProductId(1006);
+					order.setProductId(1003);
 					order.setCustomer("Five");
 					order.setNumber(1);
 					try {
